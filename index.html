@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Lotto</title>
+
+		<link rel="icon" href="favicon.ico">
+
+        <link href="https://fonts.googleapis.com/css2?family=Padauk&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/autocompleter@6.0.3/autocomplete.min.css" rel="stylesheet">
+		<link href="global.css" rel="stylesheet">
+
+        <script src="js/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/autocompleter@6.0.3/autocomplete.min.js"></script>
+    </head>
+    <body>
+        <fieldset>
+            <legend>ထီတိုက်ရန်</legend>
+            <form>
+                <!-- check types -->
+                <div class="check_types">
+                    <label class="radio-inline">
+                        <input type="radio" name="check_type" value="single" checked>တစ်စောင်
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="check_type" value="bulk_alphabet">အစောင်တွဲ (အက္ခရာကွဲ)
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="check_type" value="bulk_number">အစောင်တွဲ (ဂဏန်းကွဲ)
+                    </label>
+                </div>
+
+                <!-- alphabets & numbers -->
+                <div class="alphabets_and_numbers">
+                    <input id="baseAlphabet" type="text" class="alphabet" minlength="1" maxlength="2" placeholder="အက္ခရာ" />
+                    <label id="alphabetBridge" class="hidden">-</label>
+                    <input id="comboAlphabet" type="text" class="alphabet hidden" minlength="1" maxlength="2" placeholder="အက္ခရာ" />
+
+                    <input id="baseNumber" type="text" class="number" minlength="6" maxlength="6" placeholder="ဂဏန်း ၆လုံး" />
+                    <label id="numberBridge" class="hidden">-</label>
+                    <input id="comboNumber" type="text" class="number hidden" minlength="6" maxlength="6" placeholder="ဂဏန်း ၆လုံး" />
+                </div>
+
+                <!-- search -->
+                <div class="buttons">
+                    <input id="reset" type="reset" value="ပြန်စမည်" />
+                    <input id="search" type="button" value="စစ်ဆေးမည်" />
+                </div>
+            </form>
+        </fieldset>
+    </body>
+</html>
