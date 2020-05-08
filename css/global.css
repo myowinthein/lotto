@@ -1,0 +1,28 @@
+@media print
+{
+    .menu, .menu *
+    {
+        display: none !important;
+    }
+}
+
+/* Variables */
+:root {
+    --global-font-size: 19px;
+    --green-button: #516b27;
+    --red-button: #6b2727bd;
+}
+
+/* Utilities */
+.hidden {
+    display: none;
+}
+.error {
+    border: 1px solid red;
+}
+
+/* Global */
+html, body {
+    font-family: 'Padauk', sans-serif;
+    text-align: center;
+}

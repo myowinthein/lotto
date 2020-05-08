@@ -1,0 +1,46 @@
+@import "global.css";
+
+/* Global */
+fieldset {
+    width: 14%;
+    margin-right: 13px;
+    padding: 10px 20px 10px 20px;
+    border: 0.5px dotted gray;
+    float: left;
+}
+
+/* Form */
+.form-group {
+    padding-bottom: 20px;
+}
+.form-label {
+    display: inline-block;
+    width: 120px;
+    font-size: var(--global-font-size);
+}
+.form-control {
+    width: 200px;
+    height: 35.5px;
+    font-size: var(--global-font-size);
+    text-align: center;
+}
+.control-textarea {
+    vertical-align: middle;
+    height: auto;
+    resize: none;
+}
+
+/* Buttons */
+.input-buttons {
+    cursor: pointer;
+    width: 140px;
+    height: 50px;
+    font-size: 17px;
+    font-weight: bolder;
+}
+#save {
+    color: var(--green-button);
+}
+#back {
+    color: var(--red-button);
+}
