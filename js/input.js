@@ -26,10 +26,7 @@ function prepareJSON (inputs) {
         // trim & clean characters
         const id = input.id
         const tagName = input.tagName
-        let value = input.value.replace(/[^က-အ0-9၀-၉ \n]/g, '').trim()
-
-        // replace value in inputs
-        input.value = value
+        let value = input.value
 
         // generate json string
         value = value.split('\n')
@@ -63,13 +60,24 @@ function downloadJSON (jsonObj) {
 window.addEventListener('load', (event) => {
     // prepare objects
     const formControlsInputs = document.querySelectorAll('.form-control')
+    const frequencyInput = document.getElementById('frequency')
+
     const saveButton = document.getElementById('save')
     const backButton = document.getElementById('back')
 
-    // delete that BITCH!
-    // formControlsInputs.forEach((input) => {
-    //     input.value = 'ည ၅၃၂၆၂၀'
-    // })
+    // form controls change
+    formControlsInputs.forEach((formControlsInput) => {
+        formControlsInput.addEventListener('change', function() {
+            const id = formControlsInput.id
+
+            let regex = /[^က-အ0-9၀-၉ \n]/g
+            if (id == 'frequency') {
+                regex = /[^0-9၀-၉]/g
+            }
+
+            this.value = localizeNumber(this.value.replace(regex, '').trim())
+        })
+    })
 
     // back click
     backButton.addEventListener('click', function() {
