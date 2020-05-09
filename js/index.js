@@ -91,7 +91,7 @@ function validate (inputs, type = 0) { // 0 - alphabet, 1 - number
 window.addEventListener('load', (event) => {
     // prepare objects
     const checkTypeInputs = document.getElementsByName('check_type')
-    const singleInput = document.querySelector('[value=single]')
+    const singleInput = document.querySelector('[value=single]')    
 
     const alphabetInputs = document.querySelectorAll('.alphabet')
     const baseAlphabetInput = document.getElementById('baseAlphabet')
@@ -139,7 +139,7 @@ window.addEventListener('load', (event) => {
     // number change
     numberInputs.forEach((numberInput) => {
         numberInput.addEventListener('change', function() {
-            this.value = this.value.replace(/[^0-9၀-၉]/g,'')
+            this.value = this.value.replace(/[^0-9၀-၉]/g, '')
         })
     })
 
@@ -158,8 +158,8 @@ window.addEventListener('load', (event) => {
         }
 
         // validate inputs
-        alphabetErrorCount = validate(alphabetsToCheck)
-        numberErrorCount = validate(numbersToCheck, 1)
+        const alphabetErrorCount = validate(alphabetsToCheck)
+        const numberErrorCount = validate(numbersToCheck, 1)
 
         // continue if valid
         if (!alphabetErrorCount && !numberErrorCount) {
