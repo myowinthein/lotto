@@ -1,5 +1,10 @@
 // prepare variables
 const alphabets = ['က', 'ခ', 'ဂ', 'ဃ', 'င', 'စ', 'ဆ', 'ဇ', 'ဈ', 'ည', 'ဋ', 'ဌ', 'ဍ', 'ဎ', 'ဏ', 'တ', 'ထ', 'ဒ', 'ဓ', 'န', 'ပ', 'ဖ', 'ဗ', 'ဘ', 'မ', 'ယ', 'ရ', 'လ', 'ဝ', 'သ', 'ဟ', 'ဠ', 'အ']
+const hiddenClass = 'hidden'
+const alphabetOptions = getAlphabetOptions()
+let checkType, baseAlphabetInput, comboAlphabetInput, baseNumberInput, comboNumberInput, tickets, lotteryCheckResults
+
+const lotteryResult = {"1":["ကက ၄၉၆","ဆ ၄၈၀","ခ ၃၆၇","ဏ ၆၃၆","မ ၃၀၁","န ၈၂၀","ဍ ၄၈၁","စ ၄၂၇"],"2":["ည ၄၁၀၄","က ၉၇၄၃","င ၄၉၄၃","ဎ ၁၅၅၁","က ၂၉၄၈","ကက ၄၃၂၆","ထ ၆၃၇၃","ရ ၄၀၀၇"],"3":["င ၂၆၇၈၇","ရ ၆၆၂၂၂","ခ ၃၃၃၅၇","ခ ၄၃၇၅၈","ဏ ၇၆၁၆၄","ဆ ၈၃၅၅၅","ဒ ၄၉၁၇၉","ဍ ၇၀၀၄၉"],"10":["ဎ ၉၈၄၁၉၈","ဈ ၄၈၂၉၆၃","ရ ၃၈၆၄၇၉","ဌ ၉၆၆၀၃၄","ကဃ ၁၈၇၃၇၂","ဓ ၇၀၁၃၃၄","သ ၃၀၁၅၀၅","ဇ ၇၄၄၄၅၀","ဒ ၄၅၂၈၂၃","န ၁၇၄၅၆၃","ဓ ၈၂၅၁၂၃","ကခ ၂၈၇၈၁၆","ဗ ၄၄၅၀၇၀","ဠ ၆၆၉၀၇၀","ဂ ၉၃၄၉၄၀","ဘ ၄၇၈၄၇၃","န ၅၆၇၉၄၆","ဋ ၂၈၇၈၅၉","ဓ ၉၀၃၃၇၅","ကဂ ၉၉၁၉၄၀"],"20":["ကခ ၅၃၈၀၃၉","န ၃၄၂၀၇၉","ကက ၈၂၇၉၈၃","သ ၃၃၅၅၀၆","ဟ ၅၃၃၉၇၀","ကဂ ၁၉၃၁၃၃","အ ၅၃၆၆၀၂","ဃ ၂၆၅၅၃၂","ထ ၄၆၆၃၀၅","မ ၇၆၇၈၃၄","ည ၈၀၉၅၅၄","ဒ ၄၈၆၅၇၁","ကင ၆၈၄၉၁၇","ဖ ၇၆၁၃၁၃","ရ ၅၂၉၀၁၃","ကခ ၁၅၈၉၁၁"],"50":["ထ ၃၇၂၃၅၁","စ ၉၆၀၅၇၅","စ ၉၃၈၈၀၈","ဏ ၇၇၂၃၁၅","စ ၈၃၄၈၄၀","ကခ ၅၆၂၁၂၃","ဇ ၇၀၀၅၂၂","ဇ ၃၂၆၅၂၇","ထ ၆၈၁၁၆၈","ဓ ၆၇၁၆၇၂","ပ ၈၈၀၇၆၅","ဎ ၈၀၃၅၇၆","ဏ ၉၁၀၃၂၃"],"100":["ဌ ၇၈၂၂၆၈","ဘ ၇၄၅၃၄၆","ယ ၆၅၆၁၃၄","စ ၇၆၆၅၃၁","ကဂ ၉၆၁၁၇၈","အ ၉၂၈၇၄၉","န ၁၁၃၈၇၀","ဒ ၁၅၄၂၀၃","ဇ ၉၁၉၇၇၁","ဌ ၉၉၇၄၀၃","ကခ ၃၁၁၇၀၁","ဌ ၆၉၂၇၈၁"],"200":["ဗ ၂၅၄၀၇၅","ကဂ ၄၂၉၉၀၂","င ၇၅၁၇၄၁","ဃ ၆၁၈၈၀၉","ဋ ၉၀၈၉၀၅","ဏ ၈၇၆၇၅၅","ခ ၅၂၃၇၂၃","လ ၂၄၀၉၀၅","ကဂ ၆၆၀၉၅၇","ဆ ၄၁၅၄၅၁","ဖ ၇၇၂၁၆၉"],"500":["ဟ ၁၁၈၅၅၆","ည ၆၆၃၇၆၇","ဆ ၄၇၇၆၈၆","ဠ ၅၅၄၂၇၅","ည ၅၃၂၆၂၀","ကင ၂၆၇၅၄၅","မ ၅၀၄၁၄၆","က ၇၄၁၁၆၃","ကဂ ၆၅၅၄၁၉","ဋ ၆၂၃၀၉၀","ဖ ၄၄၈၉၇၆","ဟ ၅၇၉၃၀၈","ဌ ၈၂၂၅၁၄","ကင ၄၁၄၂၁၇","ဠ ၄၅၁၉၆၂"],"1000":["ည ၂၃၁၁၄၅","ဝ ၉၈၄၀၂၀","ဇ ၅၄၀၉၉၁","ဋ ၅၀၀၁၆၆","ဍ ၄၉၁၃၂၆","ဆ ၃၇၀၆၉၇","ဠ ၂၁၇၃၃၉"],"2000":["ကဃ ၅၅၃၂၂၄","ဆ ၆၂၉၀၉၅","င ၂၅၆၀၆၅","ဋ ၈၅၀၅၁၇","သ ၆၆၀၁၅၉","ဋ ၆၂၀၃၂၈","ယ ၁၀၄၅၂၃"],"5000":"ဌ ၆၃၂၀၄၄","10000":"ည ၅၅၈၀၀၄","15000":"စ ၄၄၁၇၉၈","frequency":"၁၅","0.5":["အ ၃၁","ဓ ၉၉","ယ ၃၃","ဗ ၆၈","ဓ ၇၃"]}
 
 // prepare functions
 function getAlphabetOptions () {
@@ -19,7 +24,7 @@ function getAlphabetOptions () {
     return options
 }
 
-function getAutocompleteOptions (obj, options) {
+function getAutocompleteOptions (obj) {
     return {
         input: obj,
         minLength: 1,
@@ -27,7 +32,7 @@ function getAutocompleteOptions (obj, options) {
         preventSubmit: true,
         showOnFocus: true,
         fetch: function(text, update) {
-            const suggestions = options.filter(n => n.label.includes(text))
+            const suggestions = alphabetOptions.filter(n => n.label.includes(text))
             update(suggestions)
         },
         onSelect: function(item) {
@@ -37,13 +42,11 @@ function getAutocompleteOptions (obj, options) {
 }
 
 function toggleDisplay (inputs, type = 0) { // 0 - show, 1 - hide
-    const className = 'hidden'
-
     inputs.forEach((input) => {
         if (type == 1) {
-            input.classList.add(className)
+            input.classList.add(hiddenClass)
         } else {
-            input.classList.remove(className)
+            input.classList.remove(hiddenClass)
         }
     })
 }
@@ -59,6 +62,24 @@ function getCheckedRadioValue (inputs) {
     }
 
     return selectedValue
+}
+
+function getAlphabetToValidate () {
+    let alphabetsToValidate = [baseAlphabetInput]
+    if (checkType == 'bulk_alphabet') {
+        alphabetsToValidate.push(comboAlphabetInput)
+    }
+
+    return alphabetsToValidate
+}
+
+function getNumberToValidate() {
+    let numbersToValidate = [baseNumberInput]
+    if (checkType == 'bulk_number') {
+        numbersToValidate.push(comboNumberInput)
+    }
+
+    return numbersToValidate
 }
 
 function validate (inputs, type = 0) { // 0 - alphabet, 1 - number
@@ -87,24 +108,117 @@ function validate (inputs, type = 0) { // 0 - alphabet, 1 - number
     return errorCount
 }
 
+function getTickets () {
+    // prepare variables
+    const baseAlphabetValue = baseAlphabetInput.value
+    const comboAlphabetValue = comboAlphabetInput.value
+    const baseNumberValue = baseNumberInput.value
+    const comboNumberValue = comboNumberInput.value
+    let tickets = []
+
+    if (checkType == 'single') {
+        tickets.push(lotteryFormat(baseAlphabetValue, baseNumberValue))
+    }
+    else if (checkType == 'bulk_alphabet') {
+        const baseAlphabetIndex = alphabetIndexFinder(baseAlphabetValue)
+        const comboAlphabetIndex = alphabetIndexFinder(comboAlphabetValue)
+
+        for (let i = baseAlphabetIndex; i <= comboAlphabetIndex; i++) {
+            tickets.push(lotteryFormat(alphabetOptions[i].value, baseNumberValue))
+        }
+    } else if (checkType == 'bulk_number') {
+        const baseNumberValueEn = localizeNumber(baseNumberValue, 0)
+        const comboNumberValueEn = localizeNumber(comboNumberValue, 0)
+
+        for (let i = baseNumberValueEn; i <= comboNumberValueEn; i++) {
+            tickets.push(lotteryFormat(baseAlphabetValue, localizeNumber(i)))
+        }
+    }
+
+    return tickets
+}
+
+function alphabetIndexFinder (keyword) {
+    return alphabetOptions.findIndex(function(option, i){
+        return option.value === keyword
+    })
+}
+
+function lotteryFormat (alphabet, number) {
+    return `${alphabet} ${number}`
+}
+
+function lotteryChecker (results, message, limit = false) {
+    const luckyNumbers = tickets.filter(ticket => {
+        ticket = limit ? ticket.slice(0, -limit) : ticket
+
+        if (Array.isArray(results)) {
+            return results.includes(ticket)
+        } else {
+            return ticket == results
+        }
+    })
+
+    luckyNumbers.forEach(number => {
+        if (lotteryCheckResults[number] === undefined) {
+            lotteryCheckResults[number] = []
+        }
+
+        lotteryCheckResults[number].push(message)
+    })
+}
+
+function showLotteryCheckResults(notWinningDiv, winDiv) {
+    const winCount = Object.keys(lotteryCheckResults).length
+
+    if (winCount == 0) {
+        winDiv.classList.add(hiddenClass)
+        notWinningDiv.classList.remove(hiddenClass)
+    } else {
+        let messages = ''
+        let prize = ''
+        let lotteryCheckResult = ''
+
+        for (let key in lotteryCheckResults) {
+            lotteryCheckResult = lotteryCheckResults[key]
+            prize = lotteryCheckResult.join('၊ ') +' ဆု ဆွတ်ခူးပါသည်။'
+            messages += `<p><span>${key}</span><span>${prize}</span></p>`
+        }
+
+        notWinningDiv.classList.add(hiddenClass)
+        winDiv.innerHTML = messages
+        winDiv.classList.remove(hiddenClass)
+    }
+}
+
 // document ready
 window.addEventListener('load', (event) => {
     // prepare objects
     const checkTypeInputs = document.getElementsByName('check_type')
-    const singleInput = document.querySelector('[value=single]')    
+    const singleInput = document.querySelector('[value=single]')
 
     const alphabetInputs = document.querySelectorAll('.alphabet')
-    const baseAlphabetInput = document.getElementById('baseAlphabet')
-    const comboAlphabetInput = document.getElementById('comboAlphabet')
+    baseAlphabetInput = document.getElementById('baseAlphabet')
+    comboAlphabetInput = document.getElementById('comboAlphabet')
     const alphabetBridgeInput = document.getElementById('alphabetBridge')
 
     const numberInputs = document.querySelectorAll('.number')
-    const baseNumberInput = document.getElementById('baseNumber')
-    const comboNumberInput = document.getElementById('comboNumber')
+    baseNumberInput = document.getElementById('baseNumber')
+    comboNumberInput = document.getElementById('comboNumber')
     const numberBridgeInput = document.getElementById('numberBridge')
 
     const searchButton = document.getElementById('search')
     const resetButton = document.getElementById('reset')
+
+    const notWinningDiv = document.querySelector('.not_winning')
+    const winDiv = document.querySelector('.win')
+
+    // init autocomplete
+    const baseAlphabetAutocompleteOptions = getAutocompleteOptions(baseAlphabetInput)
+    const comboAlphabetAutocompleteOptions = getAutocompleteOptions(comboAlphabetInput)
+
+    autocomplete(baseAlphabetAutocompleteOptions)
+    autocomplete(comboAlphabetAutocompleteOptions)
 
     // check type change
     checkTypeInputs.forEach((checkTypeInput) => {
@@ -132,50 +246,90 @@ window.addEventListener('load', (event) => {
     // alphabet change
     alphabetInputs.forEach((alphabetInput) => {
         alphabetInput.addEventListener('change', function() {
-            this.value = this.value.replace(/[^က-အ]/g,'')
+            this.value = optimizeValue(this.value, alphabetRegex)
         })
     })
 
     // number change
     numberInputs.forEach((numberInput) => {
         numberInput.addEventListener('change', function() {
-            this.value = this.value.replace(/[^0-9၀-၉]/g, '')
+            this.value = optimizeValue(this.value, numberRegex)
         })
     })
 
     // search click
     searchButton.addEventListener('click', function() {
-        // prepare variables
-        const checkType = getCheckedRadioValue(checkTypeInputs)
-        let alphabetsToCheck = [baseAlphabetInput]
-        let numbersToCheck = [baseNumberInput]
-
-        // classified inputs to include in validation
-        if (checkType == 'bulk_alphabet') {
-            alphabetsToCheck.push(comboAlphabetInput)
-        } else if (checkType == 'bulk_number') {
-            numbersToCheck.push(comboNumberInput)
-        }
+        checkType = getCheckedRadioValue(checkTypeInputs)
 
         // validate inputs
-        const alphabetErrorCount = validate(alphabetsToCheck)
-        const numberErrorCount = validate(numbersToCheck, 1)
+        const alphabetsToValidate = getAlphabetToValidate()
+        const numbersToValidate = getNumberToValidate()
 
-        // continue if valid
+        const alphabetErrorCount = validate(alphabetsToValidate)
+        const numberErrorCount = validate(numbersToValidate, 1)
+
+        // check tickets
         if (!alphabetErrorCount && !numberErrorCount) {
+            tickets = getTickets()
+
+            // clear previous results
+            lotteryCheckResults = []
+
+            // check in 15000 lakh
+            lotteryChecker(lotteryResult['15000'], 'သိန်း ၁၅၀၀၀')
+
+            // check in 10000 lakh
+            lotteryChecker(lotteryResult['10000'], 'သိန်း ၁၀၀၀၀')
+
+            // check in 5000 lakh
+            lotteryChecker(lotteryResult['5000'], 'သိန်း ၅၀၀၀')
+
+            // check in 2000 lakh
+            lotteryChecker(lotteryResult['2000'], 'သိန်း ၂၀၀၀')
+
+            // check in 1000 lakh
+            lotteryChecker(lotteryResult['1000'], 'သိန်း ၁၀၀၀')
+
+            // check in 500 lakh
+            lotteryChecker(lotteryResult['500'], 'သိန်း ၅၀၀')
+
+            // check in 200 lakh
+            lotteryChecker(lotteryResult['200'], 'သိန်း ၂၀၀')
+
+            // check in 100 lakh
+            lotteryChecker(lotteryResult['100'], 'သိန်း ၁၀၀')
+
+            // check in 50 lakh
+            lotteryChecker(lotteryResult['50'], 'သိန်း ၅၀')
+
+            // check in 20 lakh
+            lotteryChecker(lotteryResult['20'], 'သိန်း ၂၀')
+
+            // check in 10 lakh
+            lotteryChecker(lotteryResult['10'], '၁၀ သိန်း')
+
+            // check in 3 lakh
+            lotteryChecker(lotteryResult['3'], '၃ သိန်း', 1)
+
+            // check in 2 lakh
+            lotteryChecker(lotteryResult['2'], '၂ သိန်း', 2)
+
+            // check in 1 lakh
+            lotteryChecker(lotteryResult['1'], '၁ သိန်း', 3)
+
+            // check in 0.5 lakh
+            lotteryChecker(lotteryResult['0.5'], 'ငါးသောင်း', 4)
+
+            // output to user
+            showLotteryCheckResults(notWinningDiv, winDiv)
         }
     })
 
     // reset click
     resetButton.addEventListener('click', function() {
         singleInput.click()
+
+        winDiv.classList.add(hiddenClass)
+        notWinningDiv.classList.add(hiddenClass)
     })
-
-    // init autocomplete
-    const alphabetOptions = getAlphabetOptions()
-    const baseAlphabetAutocompleteOptions = getAutocompleteOptions(baseAlphabetInput, alphabetOptions)
-    const comboAlphabetAutocompleteOptions = getAutocompleteOptions(comboAlphabetInput, alphabetOptions)
-
-    autocomplete(baseAlphabetAutocompleteOptions)
-    autocomplete(comboAlphabetAutocompleteOptions)
 })

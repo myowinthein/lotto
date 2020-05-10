@@ -8,11 +8,13 @@
         <link href="https://cdn.jsdelivr.net/npm/autocompleter@6.0.3/autocomplete.min.css" rel="stylesheet">
 		<link href="css/index.css" rel="stylesheet">
 
+        <script src="js/general.js"></script>
         <script src="js/index.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/autocompleter@6.0.3/autocomplete.min.js"></script>
     </head>
     <body>
-        <fieldset>
+        <!-- Check Lottery Ticket -->
+        <fieldset class="box">
             <legend>ထီတိုက်ရန်</legend>
             <form>
                 <!-- check types -->
@@ -43,8 +45,16 @@
                 <div class="buttons">
                     <input id="reset" type="reset" value="ပြန်စမည်" />
                     <input id="search" type="button" value="စစ်ဆေးမည်" />
-                </div>
-            </form>
+                </div>                
+            </form>           
         </fieldset>
+
+        <!-- not winning -->
+        <div class="box spacing not_winning hidden">
+            <p>ဤအကြိမ်တွင် ကံထူးခြင်းမရှိသေးပါ။</p>
+        </div>
+
+        <!-- win -->
+        <div class="box spacing win hidden"></div>
     </body>
 </html>

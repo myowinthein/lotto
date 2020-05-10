@@ -68,14 +68,11 @@ window.addEventListener('load', (event) => {
     // form controls change
     formControlsInputs.forEach((formControlsInput) => {
         formControlsInput.addEventListener('change', function() {
-            const id = formControlsInput.id
+            const id = this.id
+            const value = this.value
+            const regex = (id == 'frequency') ? numberRegex : lotteryRegex
 
-            let regex = /[^က-အ0-9၀-၉ \n]/g
-            if (id == 'frequency') {
-                regex = /[^0-9၀-၉]/g
-            }
-
-            this.value = localizeNumber(this.value.replace(regex, '').trim())
+            this.value = optimizeValue(value, regex)
         })
     })
 
