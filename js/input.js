@@ -89,11 +89,11 @@ window.addEventListener('load', (event) => {
     // form controls change
     formControlsInputs.forEach((formControlsInput) => {
         // remove comment only for debugging process
-        if (formControlsInput.id == 'event') {
-            formControlsInput.value = '၁၅'
-        } else {
-            formControlsInput.value = 'ဆ ၂၉၃၈၄၀'
-        }
+        // if (formControlsInput.id == 'event') {
+        //     formControlsInput.value = '၁၅'
+        // } else {
+        //     formControlsInput.value = 'ဆ ၂၉၃၈၄၀'
+        // }
 
         formControlsInput.addEventListener('change', function() {
             const id = this.id
