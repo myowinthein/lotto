@@ -3,8 +3,9 @@
 /* Global */
 fieldset {
     width: 13%;
+    height: 180%;
     margin-right: 4px;
-    padding: 17px;
+    padding: 15px;
     border: 0.5px dotted gray;
     float: left;
 }

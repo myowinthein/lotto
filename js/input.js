@@ -1,26 +1,32 @@
+// prepare variables
+let latestEvent
+
 // prepare functions
-function validate (inputs) {
-    const className = 'error'
-    let value, isValid
-    let errorCount = 0
+function nextEventRule (input) {
+    const value = input.value
+    const isValid = (value > lotteryResults.event)
 
-    inputs.forEach((input) => {
-        value = input.value
-        isValid = (value)
+    validator(isValid, input)
+}
 
-        if (isValid) {
-            input.classList.remove(className)
-        } else {
-            errorCount++
-            input.classList.add(className)
-        }
-    })
+function validate (inputs, eventInput) {
+    // clear previous validation
+    clearValidationInputs()
 
-    return errorCount
+    // link input with rule
+    let requireRuleInputs = inputs
+    let nextEventRuleInput = eventInput
+
+    // start validation
+    requireRule(requireRuleInputs)
+    nextEventRule(nextEventRuleInput)
+
+    // show or hide error
+    return showValidationResults()
 }
 
 function prepareJSON (inputs) {
-    const jsonObj = new Object()
+    const jsonString = new Object()
 
     inputs.forEach((input) => {
         // trim & clean characters
@@ -31,19 +37,34 @@ function prepareJSON (inputs) {
         // generate json string
         value = value.split('\n')
         if (tagName == 'INPUT') {
-            jsonObj[id] = value[0]
+            jsonString[id] = value[0]
         } else {
-            jsonObj[id] = value
+            jsonString[id] = value
         }
     })
 
-    return jsonObj
+    return JSON.stringify(jsonString)
 }
 
-function downloadJSON (jsonObj) {
+function updateJSON(jsonString) {
+    fetch(fetchURL, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: jsonString,
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('အောင်မြင်ပါသည်။')
+        })
+        .catch((error) => {
+            console.log('Something wrong in updating JSON!\n', error)
+        })
+}
+
+function downloadJSON (jsonString) {
     // prepare variables
-    const data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonObj))
-    const fileName = jsonObj.frequency
+    const data = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString)
+    const fileName = jsonString.event
 
     // create anchor link
     const anchorLink = document.createElement('a')
@@ -60,17 +81,24 @@ function downloadJSON (jsonObj) {
 window.addEventListener('load', (event) => {
     // prepare objects
     const formControlsInputs = document.querySelectorAll('.form-control')
-    const frequencyInput = document.getElementById('frequency')
+    const eventInput = document.getElementById('event')
 
     const saveButton = document.getElementById('save')
     const backButton = document.getElementById('back')
 
     // form controls change
     formControlsInputs.forEach((formControlsInput) => {
+        // remove comment only for debugging process
+        if (formControlsInput.id == 'event') {
+            formControlsInput.value = '၁၅'
+        } else {
+            formControlsInput.value = 'ဆ ၂၉၃၈၄၀'
+        }
+
         formControlsInput.addEventListener('change', function() {
             const id = this.id
             const value = this.value
-            const regex = (id == 'frequency') ? numberRegex : lotteryRegex
+            const regex = (id == 'event') ? numberRegex : lotteryRegex
 
             this.value = optimizeValue(value, regex)
         })
@@ -84,15 +112,18 @@ window.addEventListener('load', (event) => {
     // save click
     saveButton.addEventListener('click', function() {
         // validate inputs
-        const errorCount = validate(formControlsInputs)
+        validate(formControlsInputs, eventInput)
 
         // continue if valid
         if (!errorCount) {
             // build json from input values
-            const jsonObj = prepareJSON(formControlsInputs)
+            const jsonString = prepareJSON(formControlsInputs)
+
+            // update json to cloud
+            updateJSON(jsonString)
 
             // download json file
-            downloadJSON(jsonObj)
+            // downloadJSON(jsonString)
         }
     })
 })
