@@ -1,7 +1,11 @@
 // prepare variables
 const alphabets = ['က', 'ခ', 'ဂ', 'ဃ', 'င', 'စ', 'ဆ', 'ဇ', 'ဈ', 'ည', 'ဋ', 'ဌ', 'ဍ', 'ဎ', 'ဏ', 'တ', 'ထ', 'ဒ', 'ဓ', 'န', 'ပ', 'ဖ', 'ဗ', 'ဘ', 'မ', 'ယ', 'ရ', 'လ', 'ဝ', 'သ', 'ဟ', 'ဠ', 'အ']
 const hiddenClass = 'hidden'
+const errorClass = 'error'
 const alphabetOptions = getAlphabetOptions()
+
+let invalidInputs = []
+let validInputs = []
 let checkType, baseAlphabetInput, comboAlphabetInput, baseNumberInput, comboNumberInput, tickets, lotteryCheckResults
 
 const lotteryResult = {"1":["ကက ၄၉၆","ဆ ၄၈၀","ခ ၃၆၇","ဏ ၆၃၆","မ ၃၀၁","န ၈၂၀","ဍ ၄၈၁","စ ၄၂၇"],"2":["ည ၄၁၀၄","က ၉၇၄၃","င ၄၉၄၃","ဎ ၁၅၅၁","က ၂၉၄၈","ကက ၄၃၂၆","ထ ၆၃၇၃","ရ ၄၀၀၇"],"3":["င ၂၆၇၈၇","ရ ၆၆၂၂၂","ခ ၃၃၃၅၇","ခ ၄၃၇၅၈","ဏ ၇၆၁၆၄","ဆ ၈၃၅၅၅","ဒ ၄၉၁၇၉","ဍ ၇၀၀၄၉"],"10":["ဎ ၉၈၄၁၉၈","ဈ ၄၈၂၉၆၃","ရ ၃၈၆၄၇၉","ဌ ၉၆၆၀၃၄","ကဃ ၁၈၇၃၇၂","ဓ ၇၀၁၃၃၄","သ ၃၀၁၅၀၅","ဇ ၇၄၄၄၅၀","ဒ ၄၅၂၈၂၃","န ၁၇၄၅၆၃","ဓ ၈၂၅၁၂၃","ကခ ၂၈၇၈၁၆","ဗ ၄၄၅၀၇၀","ဠ ၆၆၉၀၇၀","ဂ ၉၃၄၉၄၀","ဘ ၄၇၈၄၇၃","န ၅၆၇၉၄၆","ဋ ၂၈၇၈၅၉","ဓ ၉၀၃၃၇၅","ကဂ ၉၉၁၉၄၀"],"20":["ကခ ၅၃၈၀၃၉","န ၃၄၂၀၇၉","ကက ၈၂၇၉၈၃","သ ၃၃၅၅၀၆","ဟ ၅၃၃၉၇၀","ကဂ ၁၉၃၁၃၃","အ ၅၃၆၆၀၂","ဃ ၂၆၅၅၃၂","ထ ၄၆၆၃၀၅","မ ၇၆၇၈၃၄","ည ၈၀၉၅၅၄","ဒ ၄၈၆၅၇၁","ကင ၆၈၄၉၁၇","ဖ ၇၆၁၃၁၃","ရ ၅၂၉၀၁၃","ကခ ၁၅၈၉၁၁"],"50":["ထ ၃၇၂၃၅၁","စ ၉၆၀၅၇၅","စ ၉၃၈၈၀၈","ဏ ၇၇၂၃၁၅","စ ၈၃၄၈၄၀","ကခ ၅၆၂၁၂၃","ဇ ၇၀၀၅၂၂","ဇ ၃၂၆၅၂၇","ထ ၆၈၁၁၆၈","ဓ ၆၇၁၆၇၂","ပ ၈၈၀၇၆၅","ဎ ၈၀၃၅၇၆","ဏ ၉၁၀၃၂၃"],"100":["ဌ ၇၈၂၂၆၈","ဘ ၇၄၅၃၄၆","ယ ၆၅၆၁၃၄","စ ၇၆၆၅၃၁","ကဂ ၉၆၁၁၇၈","အ ၉၂၈၇၄၉","န ၁၁၃၈၇၀","ဒ ၁၅၄၂၀၃","ဇ ၉၁၉၇၇၁","ဌ ၉၉၇၄၀၃","ကခ ၃၁၁၇၀၁","ဌ ၆၉၂၇၈၁"],"200":["ဗ ၂၅၄၀၇၅","ကဂ ၄၂၉၉၀၂","င ၇၅၁၇၄၁","ဃ ၆၁၈၈၀၉","ဋ ၉၀၈၉၀၅","ဏ ၈၇၆၇၅၅","ခ ၅၂၃၇၂၃","လ ၂၄၀၉၀၅","ကဂ ၆၆၀၉၅၇","ဆ ၄၁၅၄၅၁","ဖ ၇၇၂၁၆၉"],"500":["ဟ ၁၁၈၅၅၆","ည ၆၆၃၇၆၇","ဆ ၄၇၇၆၈၆","ဠ ၅၅၄၂၇၅","ည ၅၃၂၆၂၀","ကင ၂၆၇၅၄၅","မ ၅၀၄၁၄၆","က ၇၄၁၁၆၃","ကဂ ၆၅၅၄၁၉","ဋ ၆၂၃၀၉၀","ဖ ၄၄၈၉၇၆","ဟ ၅၇၉၃၀၈","ဌ ၈၂၂၅၁၄","ကင ၄၁၄၂၁၇","ဠ ၄၅၁၉၆၂"],"1000":["ည ၂၃၁၁၄၅","ဝ ၉၈၄၀၂၀","ဇ ၅၄၀၉၉၁","ဋ ၅၀၀၁၆၆","ဍ ၄၉၁၃၂၆","ဆ ၃၇၀၆၉၇","ဠ ၂၁၇၃၃၉"],"2000":["ကဃ ၅၅၃၂၂၄","ဆ ၆၂၉၀၉၅","င ၂၅၆၀၆၅","ဋ ၈၅၀၅၁၇","သ ၆၆၀၁၅၉","ဋ ၆၂၀၃၂၈","ယ ၁၀၄၅၂၃"],"5000":"ဌ ၆၃၂၀၄၄","10000":"ည ၅၅၈၀၀၄","15000":"စ ၄၄၁၇၉၈","frequency":"၁၅","0.5":["အ ၃၁","ဓ ၉၉","ယ ၃၃","ဗ ၆၈","ဓ ၇၃"]}
@@ -64,51 +68,114 @@ function getCheckedRadioValue (inputs) {
     return selectedValue
 }
 
-function getAlphabetToValidate () {
-    let alphabetsToValidate = [baseAlphabetInput]
-    if (checkType == 'bulk_alphabet') {
-        alphabetsToValidate.push(comboAlphabetInput)
-    }
-
-    return alphabetsToValidate
+function uniqueArray (array) {
+    return array.filter((item, i, ar) => ar.indexOf(item) === i)
 }
 
-function getNumberToValidate() {
-    let numbersToValidate = [baseNumberInput]
-    if (checkType == 'bulk_number') {
-        numbersToValidate.push(comboNumberInput)
-    }
-
-    return numbersToValidate
-}
-
-function validate (inputs, type = 0) { // 0 - alphabet, 1 - number
-    // prepare variables
-    const className = 'error'
-    let value, isValid
+function showValidationResults () {
     let errorCount = 0
 
-    for (const input of inputs) {
-        value = input.value
+    uniqueArray(validInputs).forEach(input => {
+        input.classList.remove(errorClass)
+    })
 
-        if (type == 0) {
-            isValid = (value)
-        } else {
-            isValid = (value && value.length == 6)
-        }
-
-        if (isValid) {
-            input.classList.remove(className)
-        } else {
-            errorCount++
-            input.classList.add(className)
-        }
-    }
+    uniqueArray(invalidInputs).forEach(input => {
+        errorCount++
+        input.classList.add(errorClass)
+    })
 
     return errorCount
 }
 
-function getTickets () {
+function validator (isValid, input) {
+    if (isValid) {
+        validInputs.push(input)
+    } else {
+        invalidInputs.push(input)
+    }
+}
+
+function requireRule (inputs) {
+    inputs.forEach(input => {
+        const value = input.value
+        const isValid = (value)
+
+        validator(isValid, input)
+    })
+}
+
+function lengthRule (inputs, limit = 6) {
+    inputs.forEach(input => {
+        const value = input.value
+        const isValid = (value.length == limit)
+
+        validator(isValid, input)
+    })
+}
+
+function lessThanEqualRule (inputs) {
+    inputs.forEach(input => {
+        const firstInput = input[0]
+        const firstInputValue = firstInput.value
+
+        const secondInput = input[1]
+        const secondInputValue = secondInput.value
+
+        const isValid = (firstInputValue <= secondInputValue)
+
+        validator(isValid, secondInput)
+    })
+}
+
+function indexLessThanEqualRule (inputs) {
+    inputs.forEach(input => {
+        const firstInput = input[0]
+        const firstInputValue = firstInput.value
+        const firstAlphabetIndex = alphabetIndexFinder(firstInputValue)
+
+        const secondInput = input[1]
+        const secondInputValue = secondInput.value
+        const secondAlphabetIndex = alphabetIndexFinder(secondInputValue)
+
+        const isValid = (firstAlphabetIndex <= secondAlphabetIndex)
+
+        validator(isValid, secondInput)
+    })
+}
+
+function validate () {
+    // clear previous validation
+    invalidInputs = []
+    validInputs = []
+
+    // link input with rule
+    let requireRuleInputs = [baseAlphabetInput, baseNumberInput]
+    let lengthRuleInputs = [baseNumberInput]
+    let lessThanEqualRuleInputs = []
+    let indexLessThanEqualRuleInputs = []
+
+    if (checkType == 'bulk_alphabet') {
+        requireRuleInputs.push(comboAlphabetInput)
+
+        indexLessThanEqualRuleInputs.push([baseAlphabetInput, comboAlphabetInput])
+    } else if (checkType == 'bulk_number') {
+        requireRuleInputs.push(comboNumberInput)
+        lengthRuleInputs.push(comboNumberInput)
+
+        lessThanEqualRuleInputs.push([baseNumberInput, comboNumberInput])
+    }
+
+    // start validation
+    requireRule(requireRuleInputs)
+    lengthRule(lengthRuleInputs)
+    lessThanEqualRule(lessThanEqualRuleInputs)
+    indexLessThanEqualRule(indexLessThanEqualRuleInputs)
+
+    // show or hide error
+    return showValidationResults()
+}
+
+function getTickets () {  
     // prepare variables
     const baseAlphabetValue = baseAlphabetInput.value
     const comboAlphabetValue = comboAlphabetInput.value
@@ -191,11 +258,24 @@ function showLotteryCheckResults(notWinningDiv, winDiv) {
     }
 }
 
+function resetResults(winDiv, notWinningDiv) {
+    winDiv.classList.add(hiddenClass)
+    notWinningDiv.classList.add(hiddenClass)
+}
+
+function resetValidations(allInputs) {
+    allInputs.forEach((input) => {
+        input.classList.remove(errorClass)
+    })
+}
+
 // document ready
 window.addEventListener('load', (event) => {
     // prepare objects
     const checkTypeInputs = document.getElementsByName('check_type')
     const singleInput = document.querySelector('[value=single]')
+
+    const allInputs = document.querySelectorAll('.control')
 
     const alphabetInputs = document.querySelectorAll('.alphabet')
     baseAlphabetInput = document.getElementById('baseAlphabet')
@@ -259,17 +339,17 @@ window.addEventListener('load', (event) => {
 
     // search click
     searchButton.addEventListener('click', function() {
+        // get check type
         checkType = getCheckedRadioValue(checkTypeInputs)
+        
+        // reset results
+        resetResults(winDiv, notWinningDiv)
 
         // validate inputs
-        const alphabetsToValidate = getAlphabetToValidate()
-        const numbersToValidate = getNumberToValidate()
-
-        const alphabetErrorCount = validate(alphabetsToValidate)
-        const numberErrorCount = validate(numbersToValidate, 1)
+        const errorCount = validate()
 
         // check tickets
-        if (!alphabetErrorCount && !numberErrorCount) {
+        if (!errorCount) {
             tickets = getTickets()
 
             // clear previous results
@@ -329,7 +409,7 @@ window.addEventListener('load', (event) => {
     resetButton.addEventListener('click', function() {
         singleInput.click()
 
-        winDiv.classList.add(hiddenClass)
-        notWinningDiv.classList.add(hiddenClass)
+        resetResults(winDiv, notWinningDiv)
+        resetValidations(allInputs)       
     })
 })
