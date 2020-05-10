@@ -80,11 +80,12 @@ function optimizeValue (str, regex) {
     return localizeNumber(str.replace(regex, '').trim())
 }
 
-function getLatestResult () {
+function getLatestEvent () {
     fetch(fetchURL)
         .then(response => response.json())
         .then(data => {
             lotteryResults = data
+            document.getElementById('event').innerHTML = `${data.event} ကြိမ်မြောက်`
         })
         .catch((error) => {
             console.log('Something wrong in getting JSON!\n', error)
@@ -92,4 +93,4 @@ function getLatestResult () {
 }
 
 // auto execute
-getLatestResult()
+getLatestEvent()
