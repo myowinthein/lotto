@@ -4,7 +4,7 @@ const alphabetRegex = /[^က-အ]/g
 const numberRegex = /[^0-9၀-၉]/g
 const enNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const mmNumbers = ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉']
-const fetchURL = 'https://jsonblob.com/api/jsonBlob/373c36ef-92aa-11ea-9d3b-9326d72dd65c'
+const fetchURL = 'https://extendsclass.com/api/json-storage/bin/ffebddf'
 const errorClass = 'error'
 
 let errorCount = 0
