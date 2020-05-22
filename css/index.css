@@ -17,6 +17,12 @@ fieldset > legend {
     top: 20px;
 }
 
+/* Logo */
+.logo {
+    width: 240px;
+    padding-bottom: 40px;
+}
+
 /* Check Types */
 .check_types, .alphabets_and_numbers {
     padding-bottom: 30px;
