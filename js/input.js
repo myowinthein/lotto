@@ -128,6 +128,8 @@ window.addEventListener('load', (event) => {
         // validate inputs
         validate(formControlsInputs, eventInput)
 
+        console.log(errorCount)
+
         // continue if valid
         if (!errorCount) {
             // build json from input values
