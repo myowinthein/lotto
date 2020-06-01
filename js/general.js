@@ -81,16 +81,12 @@ function optimizeValue (str, regex) {
 }
 
 function getLatestEvent () {
-    fetch(fetchURL)
-        .then(response => response.json())
-        .then(data => {
-            lotteryResults = data
-            document.getElementById('event').innerHTML = `${data.event} ကြိမ်မြောက်`
-        })
-        .catch((error) => {
-            console.log('Something wrong in getting JSON!\n', error)
-        })
+    return fetch(fetchURL)
+            .then(response => response.json())
+            .then(data => {
+                lotteryResults = data
+            })
+            .catch((error) => {
+                console.log('Something wrong in getting JSON!\n', error)
+            })
 }
-
-// auto execute
-getLatestEvent()

@@ -132,7 +132,7 @@ function validate () {
     return showValidationResults()
 }
 
-function getTickets () {  
+function getTickets () {
     // prepare variables
     const baseAlphabetValue = baseAlphabetInput.value
     const comboAlphabetValue = comboAlphabetInput.value
@@ -229,6 +229,8 @@ function resetValidations(allInputs) {
 // document ready
 window.addEventListener('load', (event) => {
     // prepare objects
+    const eventInput = document.getElementById('event')
+
     const checkTypeInputs = document.getElementsByName('check_type')
     const singleInput = document.querySelector('[value=single]')
 
@@ -249,6 +251,11 @@ window.addEventListener('load', (event) => {
 
     const notWinningDiv = document.querySelector('.not_winning')
     const winDiv = document.querySelector('.win')
+
+    // load latest lottery result
+    getLatestEvent().then(function() {
+        eventInput.innerHTML = `${lotteryResults.event} ကြိမ်မြောက်`
+    })
 
     // init autocomplete
     const baseAlphabetAutocompleteOptions = getAutocompleteOptions(baseAlphabetInput)
@@ -298,7 +305,7 @@ window.addEventListener('load', (event) => {
     searchButton.addEventListener('click', function() {
         // get check type
         checkType = getCheckedRadioValue(checkTypeInputs)
-        
+
         // reset results
         resetResults(winDiv, notWinningDiv)
 
@@ -367,6 +374,6 @@ window.addEventListener('load', (event) => {
         singleInput.click()
 
         resetResults(winDiv, notWinningDiv)
-        resetValidations(allInputs)       
+        resetValidations(allInputs)
     })
 })

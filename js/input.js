@@ -104,6 +104,20 @@ window.addEventListener('load', (event) => {
         })
     })
 
+    // load latest lottery result
+    getLatestEvent().then(function() {
+        for (let key in lotteryResults) {
+            const input = document.getElementById(key)
+            let value = lotteryResults[key]
+
+            if (Array.isArray(value)) {
+                value = value.join("\n")
+            }
+
+            input.value = value
+        }
+    })
+
     // back click
     backButton.addEventListener('click', function() {
         window.location.href = 'index.html'
