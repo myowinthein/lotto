@@ -19,7 +19,7 @@ function validate (inputs, eventInput) {
 
     // start validation
     requireRule(requireRuleInputs)
-    nextEventRule(nextEventRuleInput)
+    // nextEventRule(nextEventRuleInput)
 
     // show or hide error
     return showValidationResults()
@@ -127,8 +127,6 @@ window.addEventListener('load', (event) => {
     saveButton.addEventListener('click', function() {
         // validate inputs
         validate(formControlsInputs, eventInput)
-
-        console.log(errorCount)
 
         // continue if valid
         if (!errorCount) {
