@@ -17,11 +17,35 @@
     display: none;
 }
 .error {
-    border: 1px solid red;
+    border: 1px solid #e70909 !important;
 }
 
 /* Global */
 html, body {
     text-align: center;
     padding: 5px;
+}
+
+/* Buttons */
+#search {
+    color: var(--green-button);
+}
+#reset {
+    color: var(--red-button);
+}
+
+/* Results */
+.not_winning {
+    border: 1px dashed black;
+}
+.not_winning > p {
+    color: #a50606c9;
+    font-weight: bold;
+}
+.win {
+    border: 1px double black;
+}
+.win span:nth-child(2) {
+    font-weight: bold;
+    color: #06a537;
 }
