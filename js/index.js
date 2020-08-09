@@ -29,6 +29,7 @@ function getAutocompleteOptions (obj) {
         emptyMsg: 'မတွေ့ပါ။',
         preventSubmit: true,
         showOnFocus: true,
+        className: 'autocomplete-sm',
         fetch: function(text, update) {
             const suggestions = alphabetOptions.filter(n => n.label.includes(text))
             update(suggestions)

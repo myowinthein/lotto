@@ -1,0 +1,98 @@
+/*
+    Desktops & Laptops
+*/
+
+@media (min-width: 1025px) {
+    /* Variables */
+    :root {
+        --global-font-size: 19px;
+    }
+
+    /* Global */
+    fieldset > legend {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* Utilities */
+    .box {
+        width: 600px;
+        margin: 0 auto;
+        padding: 25px;
+    }
+    .spacing {
+        position: relative;
+        top: 20px;
+    }
+
+    /* Logo */
+    .logo {
+        width: 240px;
+        padding-bottom: 40px;
+    }
+
+    /* Check Types */
+    .check_types, .alphabets_and_numbers {
+        padding-bottom: 30px;
+    }
+    .check_types > label {
+        font-size: var(--global-font-size);
+    }
+    .check_types > label > input[type=radio] {
+        height: 20px;
+        width: 20px;
+        vertical-align: sub;
+    }
+
+    /* Inputs */
+    .alphabet {
+        width: 90px;
+        height: 38px;
+        font-size: var(--global-font-size);
+        text-align: center;
+        vertical-align: top; /* prevent margin changes after value selected */
+    }
+
+    .number {
+        width: 120px;
+        height: 38px;
+        font-size: var(--global-font-size);
+        text-align: center;
+    }
+
+    /* Buttons */
+    .buttons > input[type=button], input[type=reset] {
+        cursor: pointer;
+        width: 100px;
+        height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+    }
+    #search {
+        color: var(--green-button);
+    }
+    #reset {
+        color: var(--red-button);
+    }
+
+    /* Results */
+    .not_winning {
+        border: 1px dashed black;
+    }
+    .not_winning > p {
+        color: #a50606c9;
+        font-weight: bold;
+    }
+    .win {
+        border: 1px double black;
+    }
+    .win span:first-child {
+        width: 150px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .win span:nth-child(2) {
+        font-weight: bold;
+        color: #06a537;
+    }
+}

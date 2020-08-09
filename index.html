@@ -6,7 +6,9 @@
 
 		<link rel="icon" href="images/favicon.ico">
         <link href="https://cdn.jsdelivr.net/npm/autocompleter@6.0.3/autocomplete.min.css" rel="stylesheet">
-		<link href="css/index.css" rel="stylesheet">
+        <link href="css/global.css" rel="stylesheet">
+        <link href="css/index-lg.css" rel="stylesheet">
+        <link href="css/index-sm.css" rel="stylesheet">
 
         <script src="js/general.js"></script>
         <script src="js/index.js"></script>
@@ -23,13 +25,16 @@
                 <!-- check types -->
                 <div class="check_types">
                     <label class="radio-inline">
-                        <input type="radio" name="check_type" value="single" checked>တစ်စောင်
+                        <input type="radio" name="check_type" value="single" checked>
+                        <span>တစ်စောင်</span>
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="check_type" value="bulk_alphabet">အစောင်တွဲ (အက္ခရာကွဲ)
+                        <input type="radio" name="check_type" value="bulk_alphabet">
+                        <span>အစောင်တွဲ (အက္ခရာကွဲ)</span>
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="check_type" value="bulk_number">အစောင်တွဲ (ဂဏန်းကွဲ)
+                        <input type="radio" name="check_type" value="bulk_number">
+                        <span>အစောင်တွဲ (ဂဏန်းကွဲ)</span>
                     </label>
                 </div>
 
@@ -48,8 +53,8 @@
                 <div class="buttons">
                     <input id="reset" type="reset" value="ပြန်စမည်" />
                     <input id="search" type="button" value="ထီတိုက်မည်" />
-                </div>                
-            </form>           
+                </div>
+            </form>
         </fieldset>
 
         <!-- not winning -->

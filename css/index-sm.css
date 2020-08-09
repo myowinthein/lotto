@@ -1,0 +1,108 @@
+/*
+    Phones & Tablets
+*/
+
+@media (min-width: 320px) and (max-width: 1024px) {
+    /* Variables */
+    :root {
+        --global-font-size: 50px;
+        --button-font-size: 36px;
+    }
+
+    /* Global */
+    fieldset > legend {
+        font-size: 51px;
+        font-weight: bold;
+    }
+
+    /* Utilities */
+    .box {
+        width: 80%;
+        margin: 0 auto;
+        padding: 5%;
+    }
+    .spacing {
+        position: relative;
+        top: 2%;
+    }
+
+    /* Logo */
+    .logo {
+        width: 62%;
+        padding: 5%;
+    }
+
+    /* Check Types */
+    .check_types, .alphabets_and_numbers {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding-bottom: 9%;
+    }
+    .check_types > label {
+        font-size: var(--global-font-size);
+        padding-bottom: 2%;
+    }
+    .check_types > label > input[type=radio] {
+        height: 4em;
+        width: 4em;
+        vertical-align: sub;
+    }
+
+    /* Inputs */
+    .alphabet, .number {
+        width: 100%;
+        padding: 2%;
+        border: 1px solid black; /* prevent left border missing in mobile view */
+        font-size: var(--global-font-size);
+        text-align: center;
+        vertical-align: top; /* prevent margin changes after value selected */
+    }
+    #alphabetBridge, #numberBridge {
+        padding: 2%;
+        font-size: var(--button-font-size);
+    }
+    .autocomplete-sm {
+        font-size: var(--global-font-size);
+        line-height: 58px;
+    }
+
+    /* Buttons */
+    .buttons > input[type=button], input[type=reset] {
+        cursor: pointer;
+        width: 41%;
+        padding: 2%;
+        font-size: var(--button-font-size);
+        font-weight: bolder;
+    }
+    #search {
+        color: var(--green-button);
+    }
+    #reset {
+        color: var(--red-button);
+    }
+
+    /* Results */
+    .not_winning {
+        border: 1px dashed black;
+    }
+    .not_winning > p {
+        color: #a50606c9;
+        font-weight: bold;
+        font-size: var(--button-font-size);
+    }
+    .win {
+        border: 1px double black;
+    }
+    .win span:first-child {
+        width: 26%;
+        display: inline-flex;
+        font-size: var(--button-font-size);
+        font-weight: bold;
+    }
+    .win span:nth-child(2) {
+        font-weight: bold;
+        color: #06a537;
+        font-size: var(--button-font-size);
+    }
+}
