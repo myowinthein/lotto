@@ -1,6 +1,10 @@
 name: Deploy Staging
-on: push
-
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v.*
 jobs:
   job-1:
     runs-on: ubuntu-latest
