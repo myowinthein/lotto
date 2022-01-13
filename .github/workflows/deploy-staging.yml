@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "task 1"
-        run: echo github.ref
+        run: echo $GITHUB_CONTEXT
