@@ -3,9 +3,11 @@ on:
   push:
     branches:
       - test
+    tags:        
+      - v*
 jobs:
   job-1:
-    if: ${{ github.ref_type == 'tag' }} # conditions
+    if: ${{ github.ref_name=test && github.ref_type == 'tag' }} # conditions
     runs-on: ubuntu-latest
     steps:
       - name: "task 1"
