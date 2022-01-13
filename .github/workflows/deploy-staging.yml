@@ -2,11 +2,10 @@ name: Deploy Staging
 on:
   push:
     branches:
-      - master
-    tags:
-      - v*
+      - test
 jobs:
   job-1:
+    if: ${{ github.ref_type == 'tag' }} # conditions
     runs-on: ubuntu-latest
     steps:
       - name: "task 1"
