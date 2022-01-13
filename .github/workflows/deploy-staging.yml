@@ -1,0 +1,9 @@
+name: Deploy Staging
+on: push
+
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "task 1"
+        run: echo github.ref
